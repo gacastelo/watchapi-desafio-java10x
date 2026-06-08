@@ -1,7 +1,6 @@
 package com.market.watchapi.mapper;
 
-import com.market.watchapi.dto.RelogioDTO;
-import com.market.watchapi.entity.Relogio;
+import com.market.watchapi.dto.Relogio;
 import com.market.watchapi.entity.enums.MaterialCaixa;
 import com.market.watchapi.entity.enums.TipoMovimento;
 import com.market.watchapi.entity.enums.TipoVidro;
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RelogioMapper {
 
-    public RelogioDTO toDTO(Relogio r){
-        return RelogioDTO.builder()
+    public Relogio toDTO(com.market.watchapi.entity.Relogio r){
+        return Relogio.builder()
                 .id(r.getId())
                 .marca(r.getMarca())
                 .modelo(r.getModelo())
@@ -38,7 +37,7 @@ public class RelogioMapper {
         return "mergulho";
     }
 
-    private int getPontuacaoColecionador (Relogio r){
+    private int getPontuacaoColecionador (com.market.watchapi.entity.Relogio r){
         int pontos = 0;
 
         if (r.getTipoVidro() == TipoVidro.SAPPHIRE) pontos += 25;

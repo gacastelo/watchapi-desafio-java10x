@@ -58,7 +58,7 @@ public class RelogioService {
         OrdenacaoRelogios ordenacao = OrdenacaoRelogios.fromApi(ordenar);
 
         Sort sort = switch (ordenacao){
-            case NEWEST -> Sort.by(Sort.Direction.DESC, "created_at");
+            case NEWEST -> Sort.by(Sort.Direction.DESC, "createdAt");
             case PRICE_ASC -> Sort.by(Sort.Direction.ASC, "precoEmCentavos");
             case PRICE_DESC -> Sort.by(Sort.Direction.DESC, "precoEmCentavos");
             case DIAMETER_ASC -> Sort.by(Sort.Direction.ASC, "diametroMm");
@@ -99,7 +99,7 @@ public class RelogioService {
                 .materialCaixa(MaterialCaixa.fromApi(req.materialCaixa()))
                 .tipoVidro(TipoVidro.fromApi(req.tipoVidro()))
                 .resistenciaAguaM(req.resistenciaAguaM())
-                .diametroMn(req.diametroMn())
+                .diametroMm(req.diametroMm())
                 .lugToLugMm(req.lugToLugMm())
                 .espessuraMm(req.espessuraMm())
                 .larguraLugMm(req.larguraLugMm())
@@ -108,6 +108,7 @@ public class RelogioService {
                 .createdAt(Instant.now())
                 .updatedAt(Instant.now())
                 .build();
+        relogioRepository.save(r);
         return relogioMapper.toDTO(r);
     }
 
@@ -121,7 +122,7 @@ public class RelogioService {
         r.setMaterialCaixa(MaterialCaixa.fromApi(req.materialCaixa()));
         r.setTipoVidro(TipoVidro.fromApi(req.tipoVidro()));
         r.setResistenciaAguaM(req.resistenciaAguaM());
-        r.setDiametroMn(req.diametroMn());
+        r.setDiametroMm(req.diametroMm());
         r.setLugToLugMm(req.lugToLugMm());
         r.setEspessuraMm(req.espessuraMm());
         r.setLarguraLugMm(req.larguraLugMm());

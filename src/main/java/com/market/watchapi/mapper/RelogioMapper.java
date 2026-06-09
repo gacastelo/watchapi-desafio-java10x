@@ -1,6 +1,7 @@
 package com.market.watchapi.mapper;
 
-import com.market.watchapi.dto.Relogio;
+import com.market.watchapi.dto.RelogioDTO;
+import com.market.watchapi.entity.Relogio;
 import com.market.watchapi.entity.enums.MaterialCaixa;
 import com.market.watchapi.entity.enums.TipoMovimento;
 import com.market.watchapi.entity.enums.TipoVidro;
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RelogioMapper {
 
-    public Relogio toDTO(com.market.watchapi.entity.Relogio r){
-        return Relogio.builder()
+    public RelogioDTO toDTO(Relogio r){
+        return RelogioDTO.builder()
                 .id(r.getId())
                 .marca(r.getMarca())
                 .modelo(r.getModelo())

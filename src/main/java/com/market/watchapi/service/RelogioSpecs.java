@@ -72,7 +72,7 @@ public class RelogioSpecs{
         };
     }
 
-    public static Specification<Relogio> precoEmCentavosEntre(Integer min, Integer max){
+    public static Specification<Relogio> precoEmCentavosEntre(Long min, Long max){
         if (min == null && max == null) return all();
         return (root, query, cb) -> {
             if (min != null && max != null) return cb.between(root.get("precoEmCentavos"), min, max);

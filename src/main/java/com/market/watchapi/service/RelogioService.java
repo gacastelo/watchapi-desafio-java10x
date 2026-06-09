@@ -1,6 +1,9 @@
 package com.market.watchapi.service;
 
+import com.market.watchapi.dto.AtualizarRelogioRequest;
+import com.market.watchapi.dto.CriarRelogioRequest;
 import com.market.watchapi.dto.PaginaRelogioDTO;
+import com.market.watchapi.dto.RelogioDTO;
 import com.market.watchapi.entity.Relogio;
 import com.market.watchapi.entity.enums.MaterialCaixa;
 import com.market.watchapi.entity.enums.TipoMovimento;
@@ -13,6 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.util.UUID;
 
 import static com.market.watchapi.service.RelogioSpecs.*;
 
@@ -36,8 +42,8 @@ public class RelogioService {
       String tipoVidro,
       Integer resistenciaMin,
       Integer resistenciaMax,
-      Integer precoMin,
-      Integer precoMax,
+      Long precoMin,
+      Long precoMax,
       Integer diametroMin,
       Integer diametroMax,
       String ordenar
@@ -75,5 +81,61 @@ public class RelogioService {
                 resultado.getContent().stream().map(relogioMapper::toDTO).toList(),
                 resultado.getTotalElements()
         );
+    }
+
+    public RelogioDTO buscarPorId(UUID id){
+        Relogio r = relogioRepository.findById(id).orElseThrow(() -> new NaoEncontradoException("Relógio não encontrado: " + id));
+        return relogioMapper.toDTO(r);
+    }
+
+    public RelogioDTO criar(CriarRelogioRequest req){
+        Relogio r = Relogio.builder()
+                .id(UUID.randomUUID())
+                .marca(req.marca())
+                .modelo(req.modelo())
+                .referencia(req.referencia())
+                .tipoMovimento(TipoMovimento.fromApi(req.tipoMovimento()))
+                .materialCaixa(MaterialCaixa.fromApi(req.materialCaixa()))
+                .tipoVidro(TipoVidro.fromApi(req.tipoVidro()))
+                .resistenciaAguaM(req.resistenciaAguaM())
+                .diametroMn(req.diametroMn())
+                .lugToLugMm(req.lugToLugMm())
+                .espessuraMm(req.espessuraMm())
+                .larguraLugMm(req.larguraLugMm())
+                .precoEmCentavos(req.precoEmCentavos())
+                .urlImagem(req.urlImagem())
+                .createdAt(Instant.now())
+                .updatedAt(Instant.now())
+                .build();
+        return relogioMapper.toDTO(r);
+    }
+
+    public RelogioDTO atualizar(UUID id, AtualizarRelogioRequest req){
+        Relogio r = relogioRepository.findById(id).orElseThrow(() -> new NaoEncontradoException("Relógio não encontrado: " + id));
+
+        r.setMarca(req.marca());
+        r.setModelo(req.modelo());
+        r.setReferencia(req.referencia());
+        r.setTipoMovimento(TipoMovimento.fromApi(req.tipoMovimento()));
+        r.setMaterialCaixa(MaterialCaixa.fromApi(req.materialCaixa()));
+        r.setTipoVidro(TipoVidro.fromApi(req.tipoVidro()));
+        r.setResistenciaAguaM(req.resistenciaAguaM());
+        r.setDiametroMn(req.diametroMn());
+        r.setLugToLugMm(req.lugToLugMm());
+        r.setEspessuraMm(req.espessuraMm());
+        r.setLarguraLugMm(req.larguraLugMm());
+        r.setPrecoEmCentavos(req.precoEmCentavos());
+        r.setUrlImagem(req.urlImagem());
+        r.setUpdatedAt(Instant.now());
+
+        relogioRepository.save(r);
+        return relogioMapper.toDTO(r);
+    }
+
+    public void remover(UUID id){
+        if (!relogioRepository.existsById(id)){
+            throw new NaoEncontradoException("Relógio não encontrado: " + id);
+        }
+        relogioRepository.deleteById(id);
     }
 }

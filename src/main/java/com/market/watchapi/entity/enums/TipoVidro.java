@@ -6,10 +6,10 @@ public enum TipoVidro {
     public static TipoVidro fromApi(String value) {
         if (value == null || value.isBlank()) return null;
 
-        return switch (value) {
-            case "MINERAL" -> MINERAL;
-            case "SAPPHIRE" -> SAPPHIRE;
-            case "ACRYLIC" -> ACRYLIC;
+        return switch (value.toLowerCase()) {
+            case "mineral" -> MINERAL;
+            case "sapphire" -> SAPPHIRE;
+            case "acrylic" -> ACRYLIC;
             default -> throw new IllegalArgumentException("Tipo de Vidro Inválido: " + value);
         };
     }

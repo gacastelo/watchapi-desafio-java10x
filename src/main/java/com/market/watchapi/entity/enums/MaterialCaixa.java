@@ -6,7 +6,7 @@ public enum MaterialCaixa {
 
     public static MaterialCaixa fromApi(String value) {
         if (value == null || value.isBlank()) return null;
-        return switch (value) {
+        return switch (value.toLowerCase()) {
             case "steel" -> STEEL;
             case "titanium" -> TITANIUM;
             case "resin" -> RESIN;

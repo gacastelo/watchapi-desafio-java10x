@@ -20,7 +20,7 @@ public class RelogioMapper {
                 .materialCaixa(r.getMaterialCaixa().toApi())
                 .tipoVidro(r.getTipoVidro().toApi())
                 .resistenciaAguaM(r.getResistenciaAguaM())
-                .diametroMn(r.getDiametroMn())
+                .diametroMn(r.getDiametroMm())
                 .lugToLugMm(r.getLugToLugMm())
                 .espessuraMm(r.getEspessuraMm())
                 .larguraLugMm(r.getLarguraLugMm())
@@ -38,7 +38,7 @@ public class RelogioMapper {
         return "mergulho";
     }
 
-    private int getPontuacaoColecionador (com.market.watchapi.entity.Relogio r){
+    private int getPontuacaoColecionador (Relogio r){
         int pontos = 0;
 
         if (r.getTipoVidro() == TipoVidro.SAPPHIRE) pontos += 25;
@@ -52,7 +52,7 @@ public class RelogioMapper {
         if (r.getMaterialCaixa() == MaterialCaixa.STEEL) pontos += 10;
         if (r.getMaterialCaixa() == MaterialCaixa.TITANIUM) pontos += 12;
 
-        if (r.getDiametroMn() >= 38 && r.getDiametroMn() <= 42) pontos += 8;
+        if (r.getDiametroMm() >= 38 && r.getDiametroMm() <= 42) pontos += 8;
 
         return pontos;
     }

@@ -21,24 +21,6 @@ public class RelogioController {
         this.relogioService = relogioService;
     }
 
-
-    /*
-    * pagina 	int 	1 	Página atual
-porPagina 	int 	12 	Itens por página (máx 60)
-busca 	string 	- 	Busca em marca/modelo/referência
-marca 	string 	- 	Filtra por marca (case-insensitive)
-tipoMovimento 	string 	- 	quartz
-materialCaixa 	string 	- 	steel
-tipoVidro 	string 	- 	mineral
-resistenciaMin 	int 	- 	Resistência mínima (m)
-resistenciaMax 	int 	- 	Resistência máxima (m)
-precoMin 	long 	- 	Preço mínimo (centavos)
-precoMax 	long 	- 	Preço máximo (centavos)
-diametroMin 	int 	- 	Diâmetro mínimo (mm)
-diametroMax 	int 	- 	Diâmetro máximo (mm)
-ordenar 	string
-    * */
-
     @GetMapping()
     public PaginaRelogioDTO listarRelogios(
             @RequestParam(defaultValue = "1") Integer pagina,

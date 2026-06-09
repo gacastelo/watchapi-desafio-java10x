@@ -14,7 +14,7 @@ public record CriarRelogioRequest(
         @NotBlank String tipoVidro,
 
         @Min(0) int resistenciaAguaM,
-        @Min(1) int diametroMn,
+        @Min(1) int diametroMm,
         @Min(1) int lugToLugMm,
         @Min(1) int espessuraMm,
         @Min(1) int larguraLugMm,

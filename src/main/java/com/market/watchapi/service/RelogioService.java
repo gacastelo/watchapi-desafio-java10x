@@ -8,6 +8,7 @@ import com.market.watchapi.entity.Relogio;
 import com.market.watchapi.entity.enums.MaterialCaixa;
 import com.market.watchapi.entity.enums.TipoMovimento;
 import com.market.watchapi.entity.enums.TipoVidro;
+import com.market.watchapi.exception.NaoEncontradoException;
 import com.market.watchapi.mapper.RelogioMapper;
 import com.market.watchapi.repository.RelogioRepository;
 import org.springframework.data.domain.Page;

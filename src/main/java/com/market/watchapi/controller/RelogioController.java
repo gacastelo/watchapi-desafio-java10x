@@ -1,5 +1,6 @@
 package com.market.watchapi.controller;
 
+import com.market.watchapi.docs.RelogioControllerDocs;
 import com.market.watchapi.dto.AtualizarRelogioRequest;
 import com.market.watchapi.dto.CriarRelogioRequest;
 import com.market.watchapi.dto.PaginaRelogioDTO;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/relogios")
 @CrossOrigin(origins = "*")
-public class RelogioController {
+public class RelogioController implements RelogioControllerDocs {
 
     private final RelogioService relogioService;
 
@@ -21,7 +22,7 @@ public class RelogioController {
         this.relogioService = relogioService;
     }
 
-    @GetMapping()
+    @GetMapping
     public PaginaRelogioDTO listarRelogios(
             @RequestParam(defaultValue = "1") Integer pagina,
             @RequestParam(defaultValue = "12") Integer porPagina,
